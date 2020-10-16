@@ -5,7 +5,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class Connection {
@@ -25,10 +24,10 @@ public class Connection {
 	}
 
 	@PostMapping("/connection")
-	public String connectionPost(@RequestParam(value = "name", required = true) String name,
+	public String connectionPost(@RequestParam(value = "email", required = true) String email,
 			@RequestParam(value = "password", required = true) String password, Model model) {
-		if ("admin".equals(name) && "123".equals(password)) {
-			model.addAttribute("name", name);
+		if ("a@gmail.com".equals(email) && "123".equals(password)) {
+			model.addAttribute("email", email);
 			model.addAttribute("password", password);
 			return HOME;
 		}

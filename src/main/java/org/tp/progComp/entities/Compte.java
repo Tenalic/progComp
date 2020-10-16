@@ -18,6 +18,10 @@ public class Compte {
 
 	private List<Vente> listeProduitEnVente;
 
+	private List<Vente> listeAchat;
+
+	private List<Vente> listeVente;
+
 	public Compte() {
 
 	}
@@ -42,6 +46,20 @@ public class Compte {
 		this.acheteur = acheteur;
 		this.vendeur = vendeur;
 		this.listeProduitEnVente = listeProduitEnVente;
+	}
+
+	public Compte(String nom, String prenom, String email, String speudo, boolean acheteur, boolean vendeur,
+			List<Vente> listeProduitEnVente, List<Vente> listeAchat, List<Vente> listeVente) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.speudo = speudo;
+		this.acheteur = acheteur;
+		this.vendeur = vendeur;
+		this.listeProduitEnVente = listeProduitEnVente;
+		this.listeAchat = listeAchat;
+		this.listeVente = listeVente;
 	}
 
 	public String getNom() {
@@ -98,6 +116,22 @@ public class Compte {
 
 	public void setListeProduitEnVente(List<Vente> listeProduitEnVente) {
 		this.listeProduitEnVente = listeProduitEnVente;
+	}
+
+	public List<Vente> getListeAchat() {
+		return listeAchat;
+	}
+
+	public void setListeAchat(List<Vente> listeAchat) {
+		this.listeAchat = listeAchat;
+	}
+
+	public List<Vente> getListeVente() {
+		return listeVente;
+	}
+
+	public void setListeVente(List<Vente> listeVente) {
+		this.listeVente = listeVente;
 	}
 
 }
