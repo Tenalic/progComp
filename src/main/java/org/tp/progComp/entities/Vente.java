@@ -8,6 +8,10 @@ public class Vente {
 
 	private Produit produit;
 
+	private Compte acheteur;
+
+	private Compte vendeur;
+
 	public Vente() {
 
 	}
@@ -17,6 +21,15 @@ public class Vente {
 		this.quantite = quantite;
 		this.prix = prix;
 		this.produit = produit;
+	}
+
+	public Vente(int quantite, float prix, Produit produit, Compte acheteur, Compte vendeur) {
+		super();
+		this.quantite = quantite;
+		this.prix = prix;
+		this.produit = produit;
+		this.acheteur = acheteur;
+		this.vendeur = vendeur;
 	}
 
 	public int getQuantite() {
@@ -41,6 +54,22 @@ public class Vente {
 
 	public void setProduit(Produit produit) {
 		this.produit = produit;
+	}
+
+	public Compte getAcheteur() {
+		return acheteur;
+	}
+
+	public void setAcheteur(Compte acheteur) {
+		this.acheteur = acheteur;
+	}
+
+	public Compte getVendeur() {
+		return vendeur;
+	}
+
+	public void setVendeur(Compte vendeur) {
+		this.vendeur = vendeur;
 	}
 
 }
