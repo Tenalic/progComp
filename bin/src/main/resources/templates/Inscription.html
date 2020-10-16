@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<td th:text="${error} ?: ${error}" />
+	</div>
+	<div>
+		<form action="" method="post">
+			<p>
+				<label>Nom</label> <input type="text" name="nom" id="nom" required>
+			</p>
+			<p>
+				<label>Prenom</label> <input type="text" name="prenom" id="prenom"
+					required>
+			</p>
+			<p>
+				<label>Speudo</label> <input type="text" name="speudo" id="speudo"
+					required>
+			</p>
+			<p>
+				<label>Email</label> <input type="text" name="name" id="name"
+					required>
+			</p>
+			<p>
+				<label>Mot de passe</label> <input type="password" name="password"
+					id="password" required>
+			</p>
+			<button>Inscription</button>
+		</form>
+	</div>
+</body>
+</html>
