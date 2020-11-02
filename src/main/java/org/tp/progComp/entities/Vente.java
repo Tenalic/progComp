@@ -1,15 +1,29 @@
 package org.tp.progComp.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.GenerationType;
+
+@Entity
 public class Vente {
+
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	private int id;
 
 	private int quantite;
 
 	private float prix;
 
+	@OneToOne
 	private Produit produit;
 
+	@OneToOne
 	private Compte acheteur;
 
+	@OneToOne
 	private Compte vendeur;
 
 	public Vente() {
