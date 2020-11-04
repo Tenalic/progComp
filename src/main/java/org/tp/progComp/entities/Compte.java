@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Compte {
@@ -61,7 +60,7 @@ public class Compte {
 		this.speudo = speudo;
 		this.acheteur = acheteur;
 		this.vendeur = vendeur;
-		//this.listeProduitEnVente = listeProduitEnVente;
+		this.listeProduitEnVente = listeProduitEnVente;
 	}
 
 	public Compte(String nom, String prenom, String email, String speudo, boolean acheteur, boolean vendeur,
@@ -73,9 +72,9 @@ public class Compte {
 		this.speudo = speudo;
 		this.acheteur = acheteur;
 		this.vendeur = vendeur;
-		//this.listeProduitEnVente = listeProduitEnVente;
-		//this.listeAchat = listeAchat;
-		//this.listeVente = listeVente;
+		this.listeProduitEnVente = listeProduitEnVente;
+		this.listeAchat = listeAchat;
+		this.listeVente = listeVente;
 	}
 
 	public String getNom() {
