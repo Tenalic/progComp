@@ -31,30 +31,27 @@ public class Inscription {
 			@RequestParam(value = "password", required = true) String password,
 			@RequestParam(value = "vendeur") String vendeur, Model model) {
 		if (nom != null && prenom != null && speudo != null && email != null && password != null) {
-			System.out.println("ici1");
-			if ("oui".equals(vendeur)) {
-				System.out.println("ici2");
-				compteService.createCompte(nom, prenom, email, speudo, password, true);
-			} else {
-				System.out.println("ici3");
-				compteService.createCompte(nom, prenom, email, speudo, password, false);
-			}/*
 			if (compteService.findCompteByEmail(email) == null) {
 				if (compteService.findCompteBySpeudo(speudo) == null) {
+					String response = null;
 					if ("oui".equals(vendeur)) {
-						compteService.createCompte(nom, prenom, email, speudo, password, true);
+						response = compteService.createCompte(nom, prenom, email, speudo, password, true);
 					} else {
-						compteService.createCompte(nom, prenom, email, speudo, password, false);
+						response = compteService.createCompte(nom, prenom, email, speudo, password, false);
 					}
-					return HOME;
+					if (response != null) {
+						return HOME;
+					} else {
+						model.addAttribute("error", "Erreur : problème lors de la creation du compte");
+					}
 				} else {
-					model.addAttribute("error", "Erreur : speudo deja utilisé");
+					model.addAttribute("error", "Erreur : speudo déjà utilisé");
 				}
 			} else {
-				model.addAttribute("error", "Erreur : email deja utilisé");
-			}*/
+				model.addAttribute("error", "Erreur : email déjà utilisé");
+			}
 		} else {
-			model.addAttribute("error", "Erreur : champ nom valide");
+			model.addAttribute("error", "Erreur : champ nom remplie");
 		}
 		return INSCRIPTION;
 	}
