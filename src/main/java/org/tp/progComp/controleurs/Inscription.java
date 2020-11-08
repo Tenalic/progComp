@@ -6,13 +6,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.tp.progComp.entities.Compte;
 import org.tp.progComp.services.CompteService;
+import org.tp.progComp.services.Utils;
 
 @Controller
 public class Inscription {
 
 	@Autowired
-	CompteService compteService;
+	private CompteService compteService;
+
+	@Autowired
+	private Utils utils;
 
 	private String INSCRIPTION = "Inscription";
 
@@ -33,13 +38,16 @@ public class Inscription {
 		if (nom != null && prenom != null && speudo != null && email != null && password != null) {
 			if (compteService.findCompteByEmail(email) == null) {
 				if (compteService.findCompteBySpeudo(speudo) == null) {
-					String response = null;
+					Compte compte = null;
 					if ("oui".equals(vendeur)) {
-						response = compteService.createCompte(nom, prenom, email, speudo, password, true);
+						compte = compteService.createCompte(nom, prenom, email, speudo, utils.generateHash(password),
+								true);
 					} else {
-						response = compteService.createCompte(nom, prenom, email, speudo, password, false);
+						compte = compteService.createCompte(nom, prenom, email, speudo, utils.generateHash(password),
+								false);
 					}
-					if (response != null) {
+					if (compte != null) {
+						model.addAttribute("compte", compte);
 						return HOME;
 					} else {
 						model.addAttribute("error", "Erreur : problème lors de la creation du compte");
