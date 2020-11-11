@@ -5,8 +5,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+		<td th:text="${error} ?: ${error}" />
+
 	<div>
-		<p th:text="'Hello, ' + ${compte.speudo} + ' ' +  ${password} +' !'" />
+		<td th:text="${compte} ? 'Hello ' + ${compte.speudo} + ' !' : 'Hello world !'" />
 	</div>
 </body>
 </html>
