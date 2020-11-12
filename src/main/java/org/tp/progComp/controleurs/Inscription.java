@@ -1,5 +1,7 @@
 package org.tp.progComp.controleurs;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +23,7 @@ public class Inscription {
 
 	private String INSCRIPTION = "Inscription";
 
-	private String HOME = "Home";
+	private String HOME = "home";
 
 	@GetMapping("/inscription")
 	public String inscriptionGet() {
@@ -34,7 +36,7 @@ public class Inscription {
 			@RequestParam(value = "speudo", required = true) String speudo,
 			@RequestParam(value = "email", required = true) String email,
 			@RequestParam(value = "password", required = true) String password,
-			@RequestParam(value = "vendeur") String vendeur, Model model) {
+			@RequestParam(value = "vendeur") String vendeur, Model model, HttpSession session) {
 		if (nom != null && prenom != null && speudo != null && email != null && password != null) {
 			if (compteService.findCompteByEmail(email) == null) {
 				if (compteService.findCompteBySpeudo(speudo) == null) {
@@ -47,8 +49,9 @@ public class Inscription {
 								false);
 					}
 					if (compte != null) {
+						session.setAttribute("compte", compte);
 						model.addAttribute("compte", compte);
-						return HOME;
+						return "redirect:" + HOME;
 					} else {
 						model.addAttribute("error", "Erreur : problème lors de la creation du compte");
 					}
