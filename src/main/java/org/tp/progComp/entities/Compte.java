@@ -1,8 +1,20 @@
 package org.tp.progComp.entities;
 
+import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Compte {
+
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	private int id;
 
 	private String nom;
 
@@ -16,11 +28,14 @@ public class Compte {
 
 	private boolean vendeur;
 
-	private List<Vente> listeProduitEnVente;
+	@OneToMany(mappedBy = "vendeur")
+	private Collection<Vente> listeProduitEnVente;
 
-	private List<Vente> listeAchat;
+	@OneToMany(mappedBy = "acheteur")
+	private Collection<Vente> listeAchat;
 
-	private List<Vente> listeVente;
+	@OneToMany(mappedBy = "vendeur")
+	private Collection<Vente> listeVente;
 
 	public Compte() {
 
@@ -110,7 +125,7 @@ public class Compte {
 		this.vendeur = vendeur;
 	}
 
-	public List<Vente> getListeProduitEnVente() {
+	public Collection<Vente> getListeProduitEnVente() {
 		return listeProduitEnVente;
 	}
 
@@ -118,7 +133,7 @@ public class Compte {
 		this.listeProduitEnVente = listeProduitEnVente;
 	}
 
-	public List<Vente> getListeAchat() {
+	public Collection<Vente> getListeAchat() {
 		return listeAchat;
 	}
 
@@ -126,12 +141,16 @@ public class Compte {
 		this.listeAchat = listeAchat;
 	}
 
-	public List<Vente> getListeVente() {
+	public Collection<Vente> getListeVente() {
 		return listeVente;
 	}
 
 	public void setListeVente(List<Vente> listeVente) {
 		this.listeVente = listeVente;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 }
