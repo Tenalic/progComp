@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<td th:text="${error} ?: ${error}" />
+	</div>
+	<div>
+		<form action="" method="post">
+			<p>
+				<label>Email</label> <input type="text" name="email" id="email"
+					required>
+			</p>
+			<p>
+				<label>Mot de passe</label> <input type="password" name="password"
+					id="password" required>
+			</p>
+			<button>Connection</button>
+		</form>
+	</div>
+	<br>
+	<br>
+	<div>
+		<a href="/inscription">Inscription</a>
+	</div>
+</body>
+</html>

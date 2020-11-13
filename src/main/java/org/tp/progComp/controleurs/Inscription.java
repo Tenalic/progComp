@@ -62,7 +62,7 @@ public class Inscription {
 				model.addAttribute("error", "Erreur : email déjà utilisé");
 			}
 		} else {
-			model.addAttribute("error", "Erreur : champ nom remplie");
+			model.addAttribute("error", "Erreur : champs nom remplies");
 		}
 		return INSCRIPTION;
 	}
