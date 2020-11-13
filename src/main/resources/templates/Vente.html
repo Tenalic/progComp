@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Vente</title>
+</head>
+<body>
+<div>
+		<td th:text="${error} ?: ${error}" />
+	</div>
+	<div>
+		<form action="" method="post">
+			<p>
+				<label>Nom du produit</label> <input type="text" name="nomProduit" id="nomProduit"
+					required>
+			</p>
+			<p>
+				<label>Categorie</label> <input type="text" name="categorie" id="categorie"
+					required>
+			</p>
+			<p>
+				<label>Sous-Categorie</label> <input type="text" name="miniCategorie"
+					id="miniCategorie" required>
+			</p>
+			<button>Ajouter Produit</button>
+		</form>
+	</div>
+	<br>
+	<br>
+	<div>
+		<a href="/home">Annuler</a>
+	</div>
+</body>
+</html>

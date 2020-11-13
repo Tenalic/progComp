@@ -5,15 +5,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div th:if="${compte}">
-		<a href="/deconnexion">Déconnexion</a>
-	</div>
-	
-	<div th:if="${compte} == null">
-		<a href="/connection">Connection</a>
-		<a href="/inscription">inscription</a>
-	</div>
-	
 
 		<td th:text="${error} ?: ${error}" />
 
