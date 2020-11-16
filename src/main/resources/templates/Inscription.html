@@ -2,13 +2,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Insciption</title>
 </head>
 <body>
-	<div>
-		<td th:text="${error} ?: ${error}" />
+	<h1 align="center">Insciption</h1>
+	<div align="center">
+		<h2 th:text="${error} ?: ${error}" />
 	</div>
-	<div>
+	<div align="center">
 		<form action="" method="post">
 			<p>
 				<label>Prenom</label> <input type="text" name="prenom" id="prenom"
@@ -31,21 +32,16 @@
 					id="password" required>
 			</p>
 			<p>
-				<label>Vendeur?</label><input type="radio" name="vendeur" value="oui" /> Oui <input
-					type="radio" name="vendeur" value="non" checked /> Non
+				<label>Vendeur?</label><input type="radio" name="vendeur"
+					value="oui" /> Oui <input type="radio" name="vendeur" value="non"
+					checked /> Non
 			</p>
 			<button>Inscription</button>
 		</form>
 	</div>
 	<br>
-	<br>
-	<div>
-		<a href="/connection">Connection</a>
-	</div>
-	<br>
-	<br>
-	<div>
-		<a href="/home">Retour</a>
+	<div align="center">
+		<a href="/connection">Connection</a> <a href="/home">Retour</a>
 	</div>
 </body>
 </html>

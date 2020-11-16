@@ -2,23 +2,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Accueil</title>
 </head>
 <body>
-	<div th:if="${compte}">
-		<a href="/deconnexion">Déconnexion</a>
+	<div align="right" th:if="${compte}">
+		<a href="/deconnexion">Déconnexion</a> <a href="/monCompte">Mon
+			compte</a>
 	</div>
-	
-	<div th:if="${compte} == null">
-		<a href="/connection">Connection</a>
-		<a href="/inscription">inscription</a>
-	</div>
-	
 
-		<td th:text="${error} ?: ${error}" />
+	<div align="right" th:if="${compte} == null">
+		<a href="/connection">Connection</a> <a href="/inscription">inscription</a>
+	</div>
+
+	<td th:text="${error} ?: ${error}" />
 
 	<div>
-		<td th:text="${compte} ? 'Hello ' + ${compte.speudo} + ' !' : 'Hello world !'" />
+		<h1 align="center"
+			th:text="${compte} ? 'Hello ' + ${compte.speudo} + ' !' : 'Hello world !'" />
 	</div>
 </body>
 </html>
