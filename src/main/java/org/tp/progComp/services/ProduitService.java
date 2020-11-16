@@ -1,6 +1,6 @@
 package org.tp.progComp.services;
 
-import java.util.ArrayList;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ public class ProduitService implements ProduitServiceInterface{
 	private ProductConnectionRepository productRepository;
 	
 	@Override
-	public Produit findProduct(String name,String categorie, String vendorsName)
+	public Produit findProduit(String name,String categorie, String vendorsName)
 	{	
 		return productRepository.findByNomProduitAndCategorieAndPseudoVendeur(name, categorie, vendorsName);
 	}
@@ -23,12 +23,20 @@ public class ProduitService implements ProduitServiceInterface{
 	@Transactional
 	public Produit createProduit(String name,String categorie, String miniCategorie, String vendorsName)
 	{
-		if(findProduct(name,categorie,vendorsName) == null)
+		if(findProduit(name,categorie,vendorsName) == null)
 		{
 			return productRepository.save(new Produit(name,categorie,miniCategorie,vendorsName));
 		}else
 		{
 			return null;		}
+	}
+
+	@Override
+	public Produit findByNomProduit(String nomProduit) {
+		// TODO Auto-generated method stub
+		
+		return productRepository.findByNomProduit(nomProduit);
+
 	}
 
 	

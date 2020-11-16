@@ -13,12 +13,26 @@
 		<a href="/connection">Connection</a>
 		<a href="/inscription">inscription</a>
 	</div>
-	
 
 		<td th:text="${error} ?: ${error}" />
 
 	<div>
 		<td th:text="${compte} ? 'Hello ' + ${compte.speudo} + ' !' : 'Hello world !'" />
 	</div>
+	
+	<form action="" method="post">
+			<p>
+				<label>Votre Recherche</label> <input type="text" name="nomProduit" id="nomProduit"
+					required>
+			</p>
+			<button>Rechercher Produit</button>
+		</form>
+		
+		<div>
+			<h5 th:text="${produit} ? 'voici ' + ${produit.nomProduit} + 'de ' + ${produit.pseudoVendeur} : 'Pas de Produit'"  ></h5>
+		</div>
+		
+		
+
 </body>
 </html>

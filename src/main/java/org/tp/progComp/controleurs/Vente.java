@@ -44,7 +44,7 @@ public class Vente {
 					Produit produit = null;
 					if (compte == null) {
 						model.addAttribute("error", "Erreur : problème lors de la creation du compte");
-						return HOME;  
+						return "redirect:home";  
 					} else {
 						produit = produitService.createProduit(nomProduit, categorie, miniCategorie, compte.getSpeudo());
 						model.addAttribute("produit", produit);
