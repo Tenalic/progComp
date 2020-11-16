@@ -28,8 +28,8 @@ public class Compte {
 
 	private boolean vendeur;
 
-	@OneToMany(mappedBy = "vendeur")
-	private Collection<Vente> listeProduitEnVente;
+	@OneToMany(mappedBy = "produit")
+	private Collection<Annonce> listeProduitEnVente;
 
 	@OneToMany(mappedBy = "acheteur")
 	private Collection<Vente> listeAchat;
@@ -52,7 +52,7 @@ public class Compte {
 	}
 
 	public Compte(String nom, String prenom, String email, String speudo, boolean acheteur, boolean vendeur,
-			List<Vente> listeProduitEnVente) {
+			Collection<Annonce> listeProduitEnVente) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -64,7 +64,7 @@ public class Compte {
 	}
 
 	public Compte(String nom, String prenom, String email, String speudo, boolean acheteur, boolean vendeur,
-			List<Vente> listeProduitEnVente, List<Vente> listeAchat, List<Vente> listeVente) {
+			Collection<Annonce> listeProduitEnVente, List<Vente> listeAchat, List<Vente> listeVente) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -125,11 +125,11 @@ public class Compte {
 		this.vendeur = vendeur;
 	}
 
-	public Collection<Vente> getListeProduitEnVente() {
+	public Collection<Annonce> getListeProduitEnVente() {
 		return listeProduitEnVente;
 	}
 
-	public void setListeProduitEnVente(List<Vente> listeProduitEnVente) {
+	public void setListeProduitEnVente(Collection<Annonce> listeProduitEnVente) {
 		this.listeProduitEnVente = listeProduitEnVente;
 	}
 
