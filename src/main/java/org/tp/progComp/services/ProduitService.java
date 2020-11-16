@@ -32,9 +32,7 @@ public class ProduitService implements ProduitServiceInterface{
 	}
 
 	@Override
-	public Produit findByNomProduit(String nomProduit) {
-		// TODO Auto-generated method stub
-		
+	public Produit findByNomProduit(String nomProduit) {		
 		return productRepository.findByNomProduit(nomProduit);
 
 	}

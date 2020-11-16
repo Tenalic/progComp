@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -18,6 +19,9 @@ import org.tp.progComp.services.ProduitService;
 
 @Controller
 public class Home {
+	
+	@Autowired
+	ProduitService produitService;
 
 	@RequestMapping("/")
 	public String link() {
@@ -38,26 +42,30 @@ public class Home {
 		session.removeAttribute("compte");
 		return "redirect:home";
 	}
-	
+
 	@PostMapping("/home")
-	public String rechercheVente(@RequestParam(value = "nomProduit", required = true) String nomProduit, HttpSession session, Model model)
-	{
-		ProduitService produitService = new ProduitService();
+	public String rechercheVente(@RequestParam(value = "nomProduit", required = true) String nomProduit,
+			HttpSession session, Model model) {
 		System.out.println("aa");
-		Produit produit = produitService.findByNomProduit(nomProduit);
-			if(produit != null) {
-			//juste test avec 1 seul
-			model.addAttribute("produit",produit);
+		Produit produit = produitService.findByNomProduit("test2");
+
+		if (produit == null) {
+			System.out.println("c'est null");
+		} else {
+			System.out.println("c'est pas null");
+		}
+		if (produit != null) {
+			// juste test avec 1 seul
+			model.addAttribute("produit", produit);
 			System.out.println(produit.getPseudoVendeur());
 			return "Home";
-			//Faire tableau dynamique 
-		}else
-		{
+			// Faire tableau dynamique
+		} else {
 			model.addAttribute("error", "Erreur : champs nom remplies");
 			return "Home";
-			//afficher pas de resultat;
+			// afficher pas de resultat;
 		}
-		
+
 	}
-	
+
 }
