@@ -7,13 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.tp.progComp.entities.Compte;
 import org.tp.progComp.entities.Produit;
-import org.tp.progComp.services.CompteService;
 import org.tp.progComp.services.ProduitService;
-import org.tp.progComp.services.Utils;
 
 @Controller
 public class Vente {

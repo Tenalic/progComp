@@ -2,13 +2,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Connection</title>
 </head>
 <body>
-	<div>
-		<td th:text="${error} ?: ${error}" />
+	<h1 align="center">Connection</h1>
+	<div align="center">
+		<h2 th:text="${error} ?: ${error}" />
 	</div>
-	<div>
+	<div align="center">
 		<form action="" method="post">
 			<p>
 				<label>Email</label> <input type="text" name="email" id="email"
@@ -22,14 +23,8 @@
 		</form>
 	</div>
 	<br>
-	<br>
-	<div>
-		<a href="/inscription">Inscription</a>
-	</div>
-	<br>
-	<br>
-	<div>
-		<a href="/home">Retour</a>
+	<div align="center">
+		<a href="/inscription">Inscription</a> <a href="/home">Retour</a>
 	</div>
 </body>
 </html>
