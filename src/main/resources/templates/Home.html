@@ -8,6 +8,9 @@
 	<div align="right" th:if="${compte}">
 		<a href="/deconnexion">Déconnexion</a> <a href="/monCompte">Mon
 			compte</a>
+		<div th:if="${compte.vendeur}">
+			<a href="/mise_en_vente">Mettre en ligne une annonce</a>
+		</div>
 	</div>
 
 	<div align="right" th:if="${compte} == null">

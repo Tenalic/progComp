@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mettre en vente</title>
+</head>
+<body>
+	<div>
+		<td th:text="${error} ?: ${error}" />
+	</div>
+	<div>
+		<form action="" method="post">
+			<p>
+				<label>Nom du produit</label> <input type="text" name="nomProduit"
+					id="nomProduit" required>
+			</p>
+			<p>
+				<label>Categorie</label> <input type="text" name="categorie"
+					id="categorie" required>
+			</p>
+			<p>
+				<label>Sous-Categorie (optionnelle)</label> <input type="text"
+					name="miniCategorie" id="miniCategorie">
+			</p>
+			<p>
+				<label>Description</label>
+				<textarea name="description" id="description"> </textarea>
+			</p>
+			<button>publier mon annonce</button>
+		</form>
+	</div>
+	<br>
+	<br>
+	<div>
+		<a href="/home">Annuler</a>
+	</div>
+</body>
+</html>

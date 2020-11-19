@@ -25,9 +25,8 @@ public class Annonce {
 
 	}
 
-	public Annonce(int id, String description, Produit produit, Compte vendeur) {
+	public Annonce(String description, Produit produit, Compte vendeur) {
 		super();
-		this.id = id;
 		this.description = description;
 		this.produit = produit;
 		this.vendeur = vendeur;
