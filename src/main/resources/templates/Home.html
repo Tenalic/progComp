@@ -32,7 +32,7 @@
 			<button>Rechercher Annonce</button>
 		</form>
 		
-		<div>
+		<div th:if="${Annonce}">
 			<h5 th:text="${Annonce.produit} ? 'voici ' + ${Annonce.produit.nomProduit} + 'de ' + ${annonce.produit.pseudoVendeur} : 'Pas de Produit'"  ></h5>
 		</div>
 		
