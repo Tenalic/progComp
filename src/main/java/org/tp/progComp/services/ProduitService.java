@@ -11,23 +11,29 @@ public class ProduitService implements ProduitServiceInterface {
 
 	@Autowired
 	private ProductConnectionRepository productRepository;
-
-	@Override
-	public Produit findProduct(String name, String categorie, String vendorsName) {
-		return productRepository.findByNomProduitAndCategorieAndPseudoVendeur(name, categorie, vendorsName);
-	}
-
-	@Transactional
+	
+	/*@Autowired
+	public Produit findProduit(String name, String categorie,String miniCategorie, String nameVendeur) {
+		return productRepository.findByNomProduitAndCategorieAndPseudoVendeur(name, categorie, nameVendeur);
+	}*/
+	
+	/*@Transactional
 	public Produit createProduit(String name, String categorie, String miniCategorie, String vendorsName) {
-		if (findProduct(name, categorie, vendorsName) == null) {
+		if (findProduit(name, categorie, miniCategorie, vendorsName) == null) {
 			return productRepository.save(new Produit(name, categorie, miniCategorie, vendorsName));
 		} else {
 			return null;
 		}
-	}
+	}*/
 
 	@Transactional
 	public Produit createProduit2(String name, String categorie, String miniCategorie, String vendorsName) {
 		return productRepository.save(new Produit(name, categorie, miniCategorie, vendorsName));
+	}
+
+	@Override
+	public Produit findByNomProduit(String nomProduit) {
+		// TODO Auto-generated method stub
+		return productRepository.findByNomProduit(nomProduit);
 	}
 }

@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.tp.progComp.entities.Annonce;
 import org.tp.progComp.entities.Compte;
 import org.tp.progComp.entities.Produit;
+import org.tp.progComp.services.AnnonceService;
 import org.tp.progComp.services.ProduitService;
 
 @Controller
@@ -22,6 +24,9 @@ public class Home {
 	
 	@Autowired
 	ProduitService produitService;
+	
+	@Autowired 
+	AnnonceService annonceService;
 
 	@RequestMapping("/")
 	public String link() {
@@ -43,7 +48,7 @@ public class Home {
 		return "redirect:home";
 	}
 
-	@PostMapping("/home")
+	/*@PostMapping("/home")
 	public String rechercheVente(@RequestParam(value = "nomProduit", required = true) String nomProduit,
 			HttpSession session, Model model) {
 		System.out.println("aa");
@@ -66,6 +71,27 @@ public class Home {
 			// afficher pas de resultat;
 		}
 
+	}*/
+	
+	@PostMapping("/home")
+	public void recherche1Annonce(@RequestParam(value = "nomProduit", required = true) String nomProduit,
+			HttpSession session, Model model,RedirectAttributes attributes) {
+		Annonce a = new Annonce();
+		Iterable<Annonce> itr = annonceService.getAllAnnonce();
+		for(Annonce an : itr)
+		{
+			System.out.println(an.getProduit().getNomProduit()+ " " + an.getProduit().getPseudoVendeur() + " pour une recherche de " + nomProduit);
+			if(an.getProduit() == produitService.findByNomProduit(nomProduit))
+			{
+				System.out.println(an.getProduit().getNomProduit()+ " " + an.getProduit().getPseudoVendeur());
+				a = an;
+				model.addAttribute("Annonce",a);
+				model.addAttribute("produit", a.getProduit());
+				
+				
+			}
+	}
+		
 	}
 
 }

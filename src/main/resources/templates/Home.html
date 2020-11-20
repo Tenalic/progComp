@@ -29,11 +29,11 @@
 				<label>Votre Recherche</label> <input type="text" name="nomProduit" id="nomProduit"
 					required>
 			</p>
-			<button>Rechercher Produit</button>
+			<button>Rechercher Annonce</button>
 		</form>
 		
 		<div>
-			<h5 th:text="${produit} ? 'voici ' + ${produit.nomProduit} + 'de ' + ${produit.pseudoVendeur} : 'Pas de Produit'"  ></h5>
+			<h5 th:text="${Annonce.produit} ? 'voici ' + ${Annonce.produit.nomProduit} + 'de ' + ${annonce.produit.pseudoVendeur} : 'Pas de Produit'"  ></h5>
 		</div>
 		
 		
