@@ -20,8 +20,7 @@
 	<td th:text="${error} ?: ${error}" />
 
 	<div>
-		<h1 align="center"
-			th:text="${compte} ? 'Hello ' + ${compte.speudo} + ' !' : 'Hello world !'" />
+		<h1 align="center" th:text="${compte} ? 'Hello ' + ${compte.speudo} + ' !' : 'Hello world !'" />
 	</div>
 	
 	<form action="" method="post">
@@ -33,9 +32,28 @@
 		</form>
 		
 		<div th:if="${Annonce}">
-			<h5 th:text="${Annonce.produit} ? 'voici ' + ${Annonce.produit.nomProduit} + 'de ' + ${annonce.produit.pseudoVendeur} : 'Pas de Produit'"  ></h5>
+			<h5 th:text="${Annonce.get(0).produit} ? 'voici ' + ${listeAnnonce.get(0).produit.nomProduit} + ' de ' + ${listeAnnonce.get(0).produit.pseudoVendeur} : 'Pas de Produit'"  ></h5>
 		</div>
 		
+		<div th:if="${listeAnnonce}">
+		<table border="1">
+			<thead>
+				<tr>
+					<th>Annonce.identifiant </th>
+					<th>Annonce.Produit</th>
+					<th>Annoce.Vendeur</th>
+				</tr>
+			</thead>
+			<tbody>
+					<tr th:each="Annonce: ${listeAnnonce}">
+						<td><h5 th:text="${Annonce.id}"></h5></td>
+						<td><h5 th:text="${Annonce.produit.nomProduit}"></h5></td>
+						<td><h5 th:text="${Annonce.produit.pseudoVendeur}"></h5></td>
+						
+					</tr>
+			</tbody>
+		</table>
+		</div>
 		
 
 </body>

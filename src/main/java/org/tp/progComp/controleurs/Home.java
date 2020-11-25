@@ -1,6 +1,7 @@
 package org.tp.progComp.controleurs;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.tp.progComp.entities.Annonce;
@@ -38,6 +40,7 @@ public class Home {
 		Compte compte = (Compte) session.getAttribute("compte");
 		if (compte != null) {
 			model.addAttribute("compte", compte);
+			System.out.println("cc");
 		}
 		return "Home";
 	}
@@ -73,8 +76,22 @@ public class Home {
 
 	}*/
 	
+	@GetMapping("/home")
+	public String afficherAnnonce(Model model,HttpSession session)
+	{
+		final List<Annonce> a = new ArrayList<Annonce>();
+		Iterable<Annonce> itr = annonceService.getAllAnnonce();
+		for (Annonce an : itr)
+		{
+			a.add(an);
+		}
+		model.addAttribute("listeAnnonce", a);
+		return "Home";
+	}
+	
+
 	@PostMapping("/home")
-	public void recherche1Annonce(@RequestParam(value = "nomProduit", required = true) String nomProduit,
+	public String recherche1Annonce(@RequestParam(value = "nomProduit", required = true) String nomProduit,
 			HttpSession session, Model model,RedirectAttributes attributes) {
 		Annonce a = new Annonce();
 		Iterable<Annonce> itr = annonceService.getAllAnnonce();
@@ -86,12 +103,13 @@ public class Home {
 				System.out.println(an.getProduit().getNomProduit()+ " " + an.getProduit().getPseudoVendeur());
 				a = an;
 				model.addAttribute("Annonce",a);
-				model.addAttribute("produit", a.getProduit());
-				
+				return "Home";
 				
 			}
+			
 	}
-		
+		return "Home";
 	}
-
+	
+	
 }
