@@ -46,7 +46,7 @@ public class Vente {
 				model.addAttribute("error", "Erreur : problème lors de la creation du compte");
 				return HOME;
 			} else {
-				produit = produitService.createProduit(nomProduit, categorie, miniCategorie, compte.getSpeudo());
+				produit = produitService.createProduit2(nomProduit, categorie, miniCategorie, compte.getSpeudo());
 				model.addAttribute("produit", produit);
 
 			}
