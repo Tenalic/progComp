@@ -1,10 +1,11 @@
 package org.tp.progComp.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Annonce {
@@ -15,11 +16,13 @@ public class Annonce {
 
 	private String description;
 
-	@ManyToOne
+	@OneToOne(fetch = FetchType.EAGER)
 	private Produit produit;
 
-	@ManyToOne
+	@OneToOne(fetch = FetchType.EAGER)
 	private Compte vendeur;
+	
+	//TODO rajouter prix
 
 	public Annonce() {
 

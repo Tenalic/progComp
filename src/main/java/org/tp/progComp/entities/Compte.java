@@ -3,7 +3,9 @@ package org.tp.progComp.entities;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,13 +30,13 @@ public class Compte {
 
 	private boolean vendeur;
 
-	@OneToMany(mappedBy = "produit")
+	@OneToMany(mappedBy = "vendeur", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Collection<Annonce> listeProduitEnVente;
 
-	@OneToMany(mappedBy = "acheteur")
+	@OneToMany(mappedBy = "acheteurVente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Collection<Vente> listeAchat;
 
-	@OneToMany(mappedBy = "vendeur")
+	@OneToMany(mappedBy = "vendeurVente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Collection<Vente> listeVente;
 
 	public Compte() {

@@ -23,7 +23,26 @@
 			<p th:text="'Liste achat : ' + TODO">/</p>
 		</div>
 		<div th:if="${compte.vendeur}">
-			<p th:text="'Liste annonce : ' + TODO">/</p>
+			<p th:text="'Liste annonce :'"></p>
+			<div th:if="${listeAnnonce}">
+				<table border="1">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Nom du produit</th>
+							<th>Description</th>
+							<th>Prix</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="annonce: ${listeAnnonce}">
+							<td><h5 th:text="${annonce.id}"></h5></td>
+							<td><h5 th:text="${annonce.produit.nomProduit}"></h5></td>
+							<td><h5 th:text="${annonce.description}"></h5></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 		<div th:if="${compte.vendeur}">
 			<p th:text="'Liste vente : ' + TODO">/</p>

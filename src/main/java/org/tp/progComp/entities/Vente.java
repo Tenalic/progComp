@@ -20,11 +20,11 @@ public class Vente {
 	@OneToOne
 	private Produit produit;
 
-	@OneToOne
-	private Compte acheteur;
+	@OneToOne()
+	private Compte acheteurVente;
 
-	@OneToOne
-	private Compte vendeur;
+	@OneToOne()
+	private Compte vendeurVente;
 
 	public Vente() {
 
@@ -42,8 +42,8 @@ public class Vente {
 		this.quantite = quantite;
 		this.prix = prix;
 		this.produit = produit;
-		this.acheteur = acheteur;
-		this.vendeur = vendeur;
+		this.acheteurVente = acheteur;
+		this.vendeurVente = vendeur;
 	}
 
 	public int getQuantite() {
@@ -70,20 +70,20 @@ public class Vente {
 		this.produit = produit;
 	}
 
-	public Compte getAcheteur() {
-		return acheteur;
+	public Compte getAcheteurVente() {
+		return acheteurVente;
 	}
 
-	public void setAcheteur(Compte acheteur) {
-		this.acheteur = acheteur;
+	public void setAcheteurVente(Compte acheteur) {
+		this.acheteurVente = acheteur;
 	}
 
-	public Compte getVendeur() {
-		return vendeur;
+	public Compte getVendeurVente() {
+		return vendeurVente;
 	}
 
-	public void setVendeur(Compte vendeur) {
-		this.vendeur = vendeur;
+	public void setVendeurVente(Compte vendeur) {
+		this.vendeurVente = vendeur;
 	}
 
 }
