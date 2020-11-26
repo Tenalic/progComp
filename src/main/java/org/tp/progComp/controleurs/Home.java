@@ -38,6 +38,7 @@ public class Home {
 	@RequestMapping("/home")
 	public String home(RedirectAttributes attributes, Model model, HttpSession session) {
 		Compte compte = (Compte) session.getAttribute("compte");
+		System.out.println("cc1");
 		if (compte != null) {
 			model.addAttribute("compte", compte);
 			System.out.println("cc");
@@ -55,7 +56,7 @@ public class Home {
 	public String rechercheVente(@RequestParam(value = "nomProduit", required = true) String nomProduit,
 			HttpSession session, Model model) {
 		System.out.println("aa");
-		Produit produit = produitService.findByNomProduit("test2");
+		Produit produit = produitService.findByNomProduit(nomProduit);
 
 		if (produit == null) {
 			System.out.println("c'est null");
@@ -80,6 +81,7 @@ public class Home {
 	public String afficherAnnonce(Model model,HttpSession session)
 	{
 		final List<Annonce> a = new ArrayList<Annonce>();
+		model.addAttribute("compte" ,(Compte) session.getAttribute("compte"));
 		Iterable<Annonce> itr = annonceService.getAllAnnonce();
 		for (Annonce an : itr)
 		{
@@ -94,6 +96,7 @@ public class Home {
 	public String recherche1Annonce(@RequestParam(value = "nomProduit", required = true) String nomProduit,
 			HttpSession session, Model model,RedirectAttributes attributes) {
 		Annonce a = new Annonce();
+		model.addAttribute("compte",(Compte) session.getAttribute("compte"));
 		Iterable<Annonce> itr = annonceService.getAllAnnonce();
 		for(Annonce an : itr)
 		{

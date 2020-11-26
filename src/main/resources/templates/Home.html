@@ -32,7 +32,7 @@
 		</form>
 		
 		<div th:if="${Annonce}">
-			<h5 th:text="${Annonce.get(0).produit} ? 'voici ' + ${listeAnnonce.get(0).produit.nomProduit} + ' de ' + ${listeAnnonce.get(0).produit.pseudoVendeur} : 'Pas de Produit'"  ></h5>
+			<h5 th:text="${Annonce.produit} ? 'voici ' + ${Annonce.produit.nomProduit} + ' de ' + ${Annonce.produit.pseudoVendeur} : 'Pas de Produit'"  ></h5>
 		</div>
 		
 		<div th:if="${listeAnnonce}">
