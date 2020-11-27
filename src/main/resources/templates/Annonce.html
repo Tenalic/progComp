@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Annonce</title>
+</head>
+<body>
+
+	<h1 align="center">Annonce</h1>
+	<div align="right" th:if="${compte}">
+		<a href="/deconnexion">Déconnexion</a> <a href="/monCompte">Mon
+			compte</a>
+		<div th:if="${compte.vendeur}">
+			<a href="/mise_en_vente">Mettre en ligne une annonce</a>
+		</div>
+	</div>
+
+	<div align="right" th:if="${compte} == null">
+		<a href="/connection">Connection</a> <a href="/inscription">inscription</a>
+	</div>
+	<div>
+		<td th:text="${error} ?: ${error}" />
+	</div>
+
+	<div align="center">
+		<p th:text="'Nom du produit : ' + ${Annonce.produit.nomProduit}">/</p>
+		<p th:text="'Categorie : ' + ${Annonce.produit.categorie}">/</p>
+		<p th:text="'Sous-Catyegorie : ' + ${Annonce.produit.miniCategorie}">/</p>
+		<p th:text="'Pseudo vendeur : ' + ${Annonce.produit.pseudoVendeur}">/</p>
+		<p th:text="'Description : ' + ${Annonce.description}">/</p>
+		<p th:text="'Description : ' + ${Annonce.prix}">/</p>
+		<div th:if="${compte}">
+			<form action=" " method="post">
+				<button name="idAnnonce" id="idAnnonce" th:value="${Annonce.id}">Acheter</button>
+			</form>
+		</div>
+		<div th:if="${compte} == null">
+			<a href="/connection">Connection</a> <a href="/inscription">inscription</a>
+		</div>
+	</div>
+
+	<br>
+	<br>
+	<div>
+		<a href="/home">Annuler</a>
+	</div>
+
+</body>
+</html>
