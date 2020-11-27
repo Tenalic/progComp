@@ -22,7 +22,9 @@ public class Annonce {
 	@OneToOne(fetch = FetchType.EAGER)
 	private Compte vendeur;
 	
-	//TODO rajouter prix
+	private float prix;
+	
+	private boolean enchere;
 
 	public Annonce() {
 
@@ -33,6 +35,25 @@ public class Annonce {
 		this.description = description;
 		this.produit = produit;
 		this.vendeur = vendeur;
+		this.prix = 0;
+	}
+	
+	public Annonce(String description, Produit produit, Compte vendeur, float prix) {
+		super();
+		this.description = description;
+		this.produit = produit;
+		this.vendeur = vendeur;
+		this.prix = prix;
+		this.enchere = false;
+	}
+	
+	public Annonce(String description, Produit produit, Compte vendeur, float prix, boolean enchere) {
+		super();
+		this.description = description;
+		this.produit = produit;
+		this.vendeur = vendeur;
+		this.prix = prix;
+		this.enchere = enchere;
 	}
 
 	public int getId() {
@@ -49,6 +70,22 @@ public class Annonce {
 
 	public Compte getVendeur() {
 		return vendeur;
+	}
+
+	public float getPrix() {
+		return prix;
+	}
+
+	public void setPrix(float prix) {
+		this.prix = prix;
+	}
+
+	public boolean isEnchere() {
+		return enchere;
+	}
+
+	public void setEnchere(boolean enchere) {
+		this.enchere = enchere;
 	}
 
 }

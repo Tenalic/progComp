@@ -34,32 +34,28 @@ public class Vente {
 		return VENTE;
 	}
 
-	@PostMapping("/vente")
-	public String ventePost(@RequestParam(value = "nomProduit", required = true) String nomProduit,
-			@RequestParam(value = "categorie", required = true) String categorie,
-			@RequestParam(value = "miniCategorie", required = true) String miniCategorie, Model model,
-			HttpSession session) {
-		if (nomProduit != null && categorie != null && miniCategorie != null) {
-			Compte compte = (Compte) session.getAttribute("compte");
-			Produit produit = null;
-			if (compte == null) {
-				model.addAttribute("error", "Erreur : problème lors de la creation du compte");
-				return HOME;
-			} else {
-				produit = produitService.createProduit2(nomProduit, categorie, miniCategorie, compte.getSpeudo());
-				model.addAttribute("produit", produit);
-
-			}
-		} else {
-			model.addAttribute("error", "Erreur : champs nom remplies");
-		}
-		return VENTE;
-	}
+	/*
+	 * @PostMapping("/vente") public String ventePost(@RequestParam(value =
+	 * "nomProduit", required = true) String nomProduit,
+	 * 
+	 * @RequestParam(value = "categorie", required = true) String categorie,
+	 * 
+	 * @RequestParam(value = "miniCategorie", required = true) String miniCategorie,
+	 * Model model, HttpSession session) { if (nomProduit != null && categorie !=
+	 * null && miniCategorie != null) { Compte compte = (Compte)
+	 * session.getAttribute("compte"); Produit produit = null; if (compte == null) {
+	 * model.addAttribute("error",
+	 * "Erreur : problème lors de la creation du compte"); return HOME; } else {
+	 * produit = produitService.createProduit2(nomProduit, categorie, miniCategorie,
+	 * compte.getSpeudo()); model.addAttribute("produit", produit); } } else {
+	 * model.addAttribute("error", "Erreur : champs nom remplies"); } return VENTE;
+	 * }
+	 */
 
 	@GetMapping("/mise_en_vente")
 	public String mettreEnVente(HttpSession session) {
 		Compte compte = (Compte) session.getAttribute("compte");
-		if(compte != null && compte.isVendeur()) {
+		if (compte != null && compte.isVendeur()) {
 			return "Mettre_en_vente";
 		}
 		return "redirect:connection";
@@ -69,14 +65,23 @@ public class Vente {
 	public String mettreEnVente(@RequestParam(value = "nomProduit", required = true) String nomProduit,
 			@RequestParam(value = "categorie", required = true) String categorie,
 			@RequestParam(value = "miniCategorie") String miniCategorie,
-			@RequestParam(value = "description", required = true) String description, Model model,
-			HttpSession session) {
+			@RequestParam(value = "description", required = true) String description,
+			@RequestParam(value = "prix", required = true) float prix,
+			@RequestParam(value = "enchere", required = true) String enchere, Model model, HttpSession session) {
 		Compte compte = (Compte) session.getAttribute("compte");
 		if (compte != null) {
 			Produit produit = produitService.createProduit2(nomProduit, categorie, miniCategorie, compte.getSpeudo());
 			if (produit != null) {
-				Annonce annonce = new Annonce(description, produit, compte);
-				Annonce result = annonceService.createAnnonce(annonce);
+				Annonce annonce = null;
+				if ("oui".equals(enchere)) {
+					annonce = new Annonce(description, produit, compte, prix, true);
+				} else {
+					annonce = new Annonce(description, produit, compte, prix, false);
+				}
+				Annonce result = null;
+				if (annonce != null) {
+					result = annonceService.createAnnonce(annonce);
+				}
 				if (result != null) {
 					return "redirect:home";
 				} else {
