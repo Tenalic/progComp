@@ -74,16 +74,20 @@ public class Vente {
 		return acheteurVente;
 	}
 
-	public void setAcheteurVente(Compte acheteur) {
-		this.acheteurVente = acheteur;
+	public void setAcheteurVente(Compte acheteurVente) {
+		this.acheteurVente = acheteurVente;
 	}
 
 	public Compte getVendeurVente() {
 		return vendeurVente;
 	}
 
-	public void setVendeurVente(Compte vendeur) {
-		this.vendeurVente = vendeur;
+	public void setVendeurVente(Compte vendeurVente) {
+		this.vendeurVente = vendeurVente;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 }

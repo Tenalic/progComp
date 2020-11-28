@@ -20,10 +20,30 @@
 		<p th:text="'Compte acheteur : ' + ${compte.acheteur}">/</p>
 		<p th:text="'Compte vendeur : ' + ${compte.vendeur}">/</p>
 		<div th:if="${compte.acheteur}">
-			<p th:text="'Liste achat : ' + TODO">/</p>
+			<p th:text="'Liste achat :'"></p>
+			<div th:if="${listeAchat}">
+				<table border="1">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Nom du produit</th>
+							<th>Nom du vendeur</th>
+							<th>Prix</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="achat: ${listeAchat}">
+							<td><h5 th:text="${achat.id}"></h5></td>
+							<td><h5 th:text="${achat.produit.nomProduit}"></h5></td>
+							<td><h5 th:text="${achat.vendeurVente.speudo}"></h5></td>
+							<td><h5 th:text="${achat.prix}"></h5></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 		<div th:if="${compte.vendeur}">
-			<p th:text="'Liste annonce :'"></p>
+			<p th:text="'Liste annonce en vente:'"></p>
 			<div th:if="${listeAnnonce}">
 				<table border="1">
 					<thead>
@@ -36,10 +56,31 @@
 					</thead>
 					<tbody>
 						<tr th:each="annonce: ${listeAnnonce}">
-							<td><h5 th:text="${annonce.id}"></h5></td>
+							<td><a th:href="@{/achater(id=${annonce.id})}">Consulter</a>
 							<td><h5 th:text="${annonce.produit.nomProduit}"></h5></td>
 							<td><h5 th:text="${annonce.description}"></h5></td>
 							<td><h5 th:text="${annonce.prix}"></h5></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p th:text="'Liste vente :'"></p>
+			<div th:if="${listeVente}">
+				<table border="1">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Nom du produit</th>
+							<th>Nom de l'acheteur</th>
+							<th>Prix</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="vente: ${listeVente}">
+							<td><h5 th:text="${vente.id}"></h5></td>
+							<td><h5 th:text="${vente.produit.nomProduit}"></h5></td>
+							<td><h5 th:text="${vente.acheteurVente.speudo}"></h5></td>
+							<td><h5 th:text="${vente.prix}"></h5></td>
 						</tr>
 					</tbody>
 				</table>

@@ -11,5 +11,5 @@ public interface CompteService {
 	public Compte createCompte(String nom, String prenom, String email, String speudo, String motDePasse, Boolean vendeur);
 	
 	public Compte Connection(String email, String password);
-
+	
 }

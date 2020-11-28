@@ -1,7 +1,5 @@
 package org.tp.progComp.services;
 
-import java.util.ArrayList;
-
 import org.tp.progComp.entities.Produit;
 
 public interface ProduitServiceInterface {
@@ -13,6 +11,8 @@ public interface ProduitServiceInterface {
 	Produit createProduit2(String nameProduct, String categorie, String miniCategorie, String pseudoVendeur);
 	
 	Produit findByNomProduit(String nomProduit);
+	
+	Produit findById(int id);
 	
 	
 }

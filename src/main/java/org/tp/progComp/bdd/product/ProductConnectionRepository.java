@@ -11,6 +11,6 @@ public interface ProductConnectionRepository extends  CrudRepository<Produit, In
 	
 	Produit findByNomProduitAndCategorieAndPseudoVendeur(String nomProduit, String categorie, String pseudoVendeur);
 	
-	
+	Produit findById(int id);
 	
 }
