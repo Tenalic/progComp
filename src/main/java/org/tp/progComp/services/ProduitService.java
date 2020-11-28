@@ -36,4 +36,8 @@ public class ProduitService implements ProduitServiceInterface {
 		// TODO Auto-generated method stub
 		return productRepository.findByNomProduit(nomProduit);
 	}
+	
+	public Produit findById(int id) {
+		return productRepository.findById(id);
+	}
 }
