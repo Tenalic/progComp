@@ -21,9 +21,6 @@ public class Acheter {
 
 	@PostMapping("/acheter")
 	public String acheter(@RequestParam(value = "idAnnonce") String idAnnonce, HttpSession session, Model model) {
-		// todo creer service pour acheter
-		// todo faire une secu pour qu'on se puisse pas acheter ces propre annonce (dans
-		// le html et service)
 		Compte compte = (Compte) session.getAttribute("compte");
 		Integer idAnnonceInt = null;
 		try {
@@ -34,6 +31,23 @@ public class Acheter {
 		if (compte != null && idAnnonceInt != null) {
 			int id = idAnnonceInt;
 			annonceService.acheterAnnonce(compte.getSpeudo(), id);
+		}
+		return "redirect:home";
+	}
+
+	@PostMapping("/supprimer")
+	public String supprimerAnnonce(@RequestParam(value = "idAnnonce") String idAnnonce, HttpSession session,
+			Model model) {
+		Compte compte = (Compte) session.getAttribute("compte");
+		Integer idAnnonceInt = null;
+		try {
+			idAnnonceInt = Integer.parseInt(idAnnonce);
+		} catch (Exception e) {
+			idAnnonceInt = null;
+		}
+		if (compte != null && idAnnonceInt != null) {
+			int id = idAnnonceInt;
+			annonceService.supprimerAnnonce(id, compte.getSpeudo());
 		}
 		return "redirect:home";
 	}
@@ -55,15 +69,15 @@ public class Acheter {
 				if (compte != null) {
 					model.addAttribute("compte", compte);
 					if (compte.getSpeudo().equals(annonce.getVendeur().getSpeudo())) {
-						model.addAttribute("modifier", true);
+						model.addAttribute("supprimer", true);
 					} else {
-						model.addAttribute("modifier", false);
+						model.addAttribute("supprimer", false);
 					}
 				}
 				return "Annonce";
 			}
 		}
-		return "home";
+		return "redirect:home";
 	}
 
 }

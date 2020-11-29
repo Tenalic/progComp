@@ -29,13 +29,18 @@
 		<p th:text="'Pseudo vendeur : ' + ${Annonce.produit.pseudoVendeur}">/</p>
 		<p th:text="'Description : ' + ${Annonce.description}">/</p>
 		<p th:text="'Description : ' + ${Annonce.prix}">/</p>
-		<div th:if="${modifier} == true">
-			<form action=" " method="post">
-				<button name="idAnnonce" id="idAnnonce" th:value="${Annonce.id}">Modifier</button>
+		<p th:text="'Enchere : ' + ${Annonce.enchere}">/</p>
+		<div th:if="${Annonce.enchere == true}">
+			<p>Fin enchere : </p>
+			<p th:text="${Annonce.toStringDate()}">/</p>
+		</div>
+		<div th:if="${supprimer} == true">
+			<form action="/supprimer" method="post">
+				<button name="idAnnonce" id="idAnnonce" th:value="${Annonce.id}">Supprimer</button>
 			</form>
 		</div>
-		<div th:if="${modifier} == false">
-			<form action=" " method="post">
+		<div th:if="${supprimer} == false">
+			<form action="/acheter" method="post">
 				<button name="idAnnonce" id="idAnnonce" th:value="${Annonce.id}">Acheter</button>
 			</form>
 		</div>

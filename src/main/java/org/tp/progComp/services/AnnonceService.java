@@ -14,6 +14,8 @@ public interface AnnonceService {
 	
 	public int deleteAnnonce(int idAnnonce);
 	
+	public int supprimerAnnonce(int idAnnonce, String pseudo);
+	
 	public int acheterAnnonce(String pseudoCompte, int idAnnonceInt);
 
 }

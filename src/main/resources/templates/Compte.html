@@ -52,6 +52,7 @@
 							<th>Nom du produit</th>
 							<th>Description</th>
 							<th>Prix</th>
+							<th>Enchere</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -60,6 +61,8 @@
 							<td><h5 th:text="${annonce.produit.nomProduit}"></h5></td>
 							<td><h5 th:text="${annonce.description}"></h5></td>
 							<td><h5 th:text="${annonce.prix}"></h5></td>
+							<td><h5 th:text="${annonce.enchere}"></h5></td>
+
 						</tr>
 					</tbody>
 				</table>
@@ -89,7 +92,6 @@
 		<div th:if="${compte.vendeur}">
 			<p th:text="'Liste vente : ' + TODO">/</p>
 		</div>
-		<a href="/monCompte">Modifier mes informations (TODO)</a>
 	</div>
 	<br>
 	<div>

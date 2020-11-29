@@ -1,5 +1,9 @@
 package org.tp.progComp.services;
 
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,27 +13,41 @@ import org.tp.progComp.entities.Annonce;
 import org.tp.progComp.entities.Vente;
 
 @Service
-public class AnnonceServiceImpl implements AnnonceService {
+public class AnnonceServiceImpl<E> implements AnnonceService {
 
 	@Autowired
 	AnnonceRepository annonceRepository;
-	
+
 	@Autowired
 	VenteService venteService;
 
-	@Override
+	@Transactional
 	public Iterable<Annonce> getAllAnnonce() {
-		return annonceRepository.findAll();
+		Iterable<Annonce> lAnnonce = annonceRepository.findAll();
+		List<Annonce> response = new ArrayList<Annonce>();
+		for (Annonce annonce : lAnnonce) {
+			if (annonce.isEnchere() && !annonce.getDateDeFin().after(new GregorianCalendar())) {
+				this.deleteAnnonce(annonce);
+			} else {
+				response.add(annonce);
+			}
+		}
+		return response;
 	}
 
-	@Override
+	@Transactional
 	public Annonce getAnnonce(int id) {
-		return annonceRepository.findAnnonceById(id);
+		Annonce annonce = annonceRepository.findAnnonceById(id);
+		if (annonce != null && annonce.isEnchere() && !annonce.getDateDeFin().after(new GregorianCalendar())) {
+			this.deleteAnnonce(annonce);
+			return null;
+		}
+		return annonce;
 	}
 
 	@Transactional
 	public Annonce createAnnonce(Annonce annonce) {
-		if(annonce != null) {
+		if (annonce != null) {
 			return annonceRepository.save(annonce);
 		}
 		return null;
@@ -37,7 +55,7 @@ public class AnnonceServiceImpl implements AnnonceService {
 
 	@Transactional
 	public int deleteAnnonce(Annonce annonce) {
-		if(annonce != null) {
+		if (annonce != null) {
 			annonceRepository.delete(annonce);
 			// TODO la supr aussi du compte associer (dans en vente)
 			// TODO verifier si sa la supr pas de vente eguallement ...
@@ -48,7 +66,7 @@ public class AnnonceServiceImpl implements AnnonceService {
 	@Transactional
 	public int acheterAnnonce(String pseudoCompte, int idAnnonceInt) {
 		Vente vente = venteService.createVente(pseudoCompte, idAnnonceInt);
-		if(vente != null) {
+		if (vente != null) {
 			deleteAnnonce(idAnnonceInt);
 		}
 		return 0;
@@ -58,6 +76,16 @@ public class AnnonceServiceImpl implements AnnonceService {
 	public int deleteAnnonce(int idAnnonce) {
 		annonceRepository.deleteById(idAnnonce);
 		return 0;
+	}
+
+	@Transactional
+	public int supprimerAnnonce(int idAnnonce, String pseudo) {
+		Annonce annonce = annonceRepository.findAnnonceById(idAnnonce);
+		if (annonce != null && pseudo != null && pseudo.equals(annonce.getVendeur().getSpeudo())) {
+			annonceRepository.deleteById(idAnnonce);
+			return 0;
+		}
+		return 1;
 	}
 
 }
