@@ -28,7 +28,7 @@ public class VenteServiceImpl implements VenteService {
 	@Transactional
 	public Vente createVente(String pseudoAcheteur, int IdAnnonce) {
 		Annonce annonce = annonceService.getAnnonce(IdAnnonce);
-		if (annonce != null) {
+		if (annonce != null && pseudoAcheteur != null && !pseudoAcheteur.equals(annonce.getVendeur().getSpeudo())) {
 			Compte compteVendeur = compteService.findCompteBySpeudo(annonce.getProduit().getPseudoVendeur());
 			Compte compteAcheteur = compteService.findCompteBySpeudo(pseudoAcheteur);
 			Produit produit = produitService.findById(annonce.getProduit().getId());
