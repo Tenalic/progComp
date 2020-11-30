@@ -82,6 +82,16 @@ public class Acheter {
 				annonce = null;
 			}
 			if (annonce != null) {
+				String devise = (String) session.getAttribute("devise");
+				if (devise == null) {
+					devise = "€";
+				}
+				model.addAttribute("devise", devise);
+				switch (devise) {
+				case "$":
+					annonce.setPrix(annonceService.euroToDollar(annonce.getPrix()));
+					break;
+				}
 				model.addAttribute("Annonce", annonce);
 				Compte compte = (Compte) session.getAttribute("compte");
 				if (compte != null) {
@@ -95,6 +105,7 @@ public class Acheter {
 						}
 					}
 				}
+				model.addAttribute("dollar", annonceService.euroToDollar(annonce.getPrix()));
 				return "Annonce";
 			}
 		}

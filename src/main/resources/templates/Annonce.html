@@ -28,7 +28,7 @@
 		<p th:text="'Sous-Catyegorie : ' + ${Annonce.produit.miniCategorie}">/</p>
 		<p th:text="'Pseudo vendeur : ' + ${Annonce.produit.pseudoVendeur}">/</p>
 		<p th:text="'Description : ' + ${Annonce.description}">/</p>
-		<p th:text="'Prix : ' + ${Annonce.prix}">/</p>
+		<p th:text="'Prix : ' + ${Annonce.prix} + ${devise}">/</p>
 		<p th:text="'Enchere : ' + ${Annonce.enchere}">/</p>
 		<div th:if="${Annonce.enchere == true}">
 			<p>Fin enchere :</p>

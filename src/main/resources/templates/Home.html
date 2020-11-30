@@ -5,6 +5,10 @@
 <title>Accueil</title>
 </head>
 <body>
+	<div align="left">
+		<p>changer devise</p>
+		<a href="/changer_devise?devise=€">€</a> <a href="/changer_devise?devise=$">$</a>
+	</div>
 	<div align="right" th:if="${compte}">
 		<a href="/deconnexion">Déconnexion</a> <a href="/monCompte">Mon
 			compte</a>
@@ -46,7 +50,7 @@
 					<th>Id</th>
 					<th>Nom</th>
 					<th>Vendeur</th>
-					<th>Prix
+					<th>Prix</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -54,7 +58,7 @@
 					<td><a th:href="@{/acheter(id=${Annonce.id})}">consulter</a></td>
 					<td><h5 th:text="${Annonce.produit.nomProduit}"></h5></td>
 					<td><h5 th:text="${Annonce.produit.pseudoVendeur}"></h5></td>
-					<td><h5 th:text="${Annonce.prix}"></h5></td>
+					<td><h5 th:text="${Annonce.prix} + ${devise}"></h5></td>
 				</tr>
 			</tbody>
 		</table>

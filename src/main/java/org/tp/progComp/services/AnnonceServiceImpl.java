@@ -113,5 +113,9 @@ public class AnnonceServiceImpl<E> implements AnnonceService {
 		}
 		return 1;
 	}
+	
+	public double euroToDollar(double prix) {
+		return prix * 1.20;
+	}
 
 }

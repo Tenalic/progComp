@@ -99,8 +99,8 @@ public class Annonce {
 		return prix;
 	}
 
-	public void setPrix(float prix) {
-		this.prix = prix;
+	public void setPrix(double d) {
+		this.prix = (float) d;
 	}
 
 	public boolean isEnchere() {
