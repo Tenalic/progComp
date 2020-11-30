@@ -32,15 +32,6 @@ public class Home {
 		return "Link";
 	}
 
-	@RequestMapping("/home")
-	public String home(RedirectAttributes attributes, Model model, HttpSession session) {
-		Compte compte = (Compte) session.getAttribute("compte");
-		if (compte != null) {
-			model.addAttribute("compte", compte);
-		}
-		return "Home";
-	}
-
 	@GetMapping("/deconnexion")
 	public String deconnexion(HttpSession session) {
 		session.removeAttribute("compte");
@@ -52,9 +43,21 @@ public class Home {
 	{
 		final List<Annonce> a = new ArrayList<Annonce>();
 		model.addAttribute("compte" ,(Compte) session.getAttribute("compte"));
+		String devise = (String) session.getAttribute("devise");
+		if(devise != null ) {
+			model.addAttribute("devise", devise);
+		} else {
+			model.addAttribute("devise", "€");
+			devise = "€";
+		}
 		Iterable<Annonce> itr = annonceService.getAllAnnonce();
 		for (Annonce an : itr)
 		{
+			switch(devise) {
+			case "$" :
+				an.setPrix(annonceService.euroToDollar(an.getPrix()));
+				break;
+			}
 			a.add(an);
 		}
 		model.addAttribute("listeAnnonce", a);
@@ -64,7 +67,7 @@ public class Home {
 
 	@PostMapping("/home")
 	public String recherche1Annonce(@RequestParam(value = "nomProduit", required = true) String nomProduit,
-			HttpSession session, Model model,RedirectAttributes attributes) {
+			HttpSession session, Model model) {
 		Annonce a = new Annonce();
 		model.addAttribute("compte",(Compte) session.getAttribute("compte"));
 		Iterable<Annonce> itr = annonceService.getAllAnnonce();
@@ -74,12 +77,19 @@ public class Home {
 			{
 				a = an;
 				model.addAttribute("Annonce",a);
+				model.addAttribute("dollar" + a.getId(), annonceService.euroToDollar(a.getPrix()));
 				return "Home";
 				
 			}
 			
 	}
 		return "Home";
+	}
+	
+	@GetMapping("/changer_devise")
+	public String changerDevise(@RequestParam(value = "devise") String devise, HttpSession session, Model model) {
+		session.setAttribute("devise", devise);
+		return "redirect:home";
 	}
 	
 	

@@ -31,9 +31,9 @@ public class Annonce {
 	private GregorianCalendar dateMiseEnLigne;
 
 	private GregorianCalendar dateDeFin;
-	
+
 	private String pseudoPlusHautEnchere; // todo dans constructeurs
-	
+
 	private int nombreEnchere; // todo dans constructeurs
 
 	public Annonce() {
@@ -71,7 +71,9 @@ public class Annonce {
 		this.dateMiseEnLigne = new GregorianCalendar();
 		this.dateDeFin = (GregorianCalendar) dateMiseEnLigne.clone();
 		if (enchere == true) {
-			this.dateDeFin.add(GregorianCalendar.SECOND, 50);
+			this.dateDeFin.add(GregorianCalendar.SECOND, 60);
+			pseudoPlusHautEnchere = null;
+			nombreEnchere = 0;
 		} else {
 			this.dateDeFin = null;
 		}
@@ -97,8 +99,8 @@ public class Annonce {
 		return prix;
 	}
 
-	public void setPrix(float prix) {
-		this.prix = prix;
+	public void setPrix(double d) {
+		this.prix = (float) d;
 	}
 
 	public boolean isEnchere() {
@@ -124,7 +126,7 @@ public class Annonce {
 	public void setDateDeFin(GregorianCalendar dateDeFin) {
 		this.dateDeFin = dateDeFin;
 	}
-	
+
 	public String toStringDate() {
 		return dateDeFin.getTime().toString();
 	}
