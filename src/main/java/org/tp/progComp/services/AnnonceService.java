@@ -17,5 +17,9 @@ public interface AnnonceService {
 	public int supprimerAnnonce(int idAnnonce, String pseudo);
 	
 	public int acheterAnnonce(String pseudoCompte, int idAnnonceInt);
+	
+	public int encherir(String pseudoCompte, int idAnnonceInt, float valeurEnchere);
+	
+	public int acheterAnnonce(String pseudoCompte, Annonce annonce);
 
 }

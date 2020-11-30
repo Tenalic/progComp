@@ -19,6 +19,24 @@ public class Acheter {
 	@Autowired
 	private AnnonceService annonceService;
 
+	@PostMapping("/encherir")
+	public String enchere(@RequestParam(value = "idAnnonce") String idAnnonce,
+			@RequestParam(value = "enchere") int enchere, HttpSession session) {
+		Compte compte = (Compte) session.getAttribute("compte");
+		Integer idAnnonceInt = null;
+		try {
+			idAnnonceInt = Integer.parseInt(idAnnonce);
+		} catch (Exception e) {
+			idAnnonceInt = null;
+		}
+		if (compte != null && idAnnonceInt != null) {
+			int id = idAnnonceInt;
+			annonceService.encherir(compte.getSpeudo(), id, enchere);
+			return "redirect:home";
+		}
+		return "Annonce";
+	}
+
 	@PostMapping("/acheter")
 	public String acheter(@RequestParam(value = "idAnnonce") String idAnnonce, HttpSession session, Model model) {
 		Compte compte = (Compte) session.getAttribute("compte");
@@ -72,6 +90,9 @@ public class Acheter {
 						model.addAttribute("supprimer", true);
 					} else {
 						model.addAttribute("supprimer", false);
+						if (annonce.isEnchere()) {
+							model.addAttribute("enchereMin", annonce.getPrix() + 1);
+						}
 					}
 				}
 				return "Annonce";

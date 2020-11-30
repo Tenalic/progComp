@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.tp.progComp.entities.Annonce;
 import org.tp.progComp.entities.Compte;
 
-public interface AnnonceRepository extends CrudRepository<Annonce, Integer> {
+public interface AnnonceRepository extends CrudRepository<Annonce, Integer>, AnnonceRepositoryCustom {
 
 	//public ArrayList<Annonce> findAllAnnonceById();
 	

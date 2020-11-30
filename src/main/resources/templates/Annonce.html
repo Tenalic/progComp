@@ -28,10 +28,10 @@
 		<p th:text="'Sous-Catyegorie : ' + ${Annonce.produit.miniCategorie}">/</p>
 		<p th:text="'Pseudo vendeur : ' + ${Annonce.produit.pseudoVendeur}">/</p>
 		<p th:text="'Description : ' + ${Annonce.description}">/</p>
-		<p th:text="'Description : ' + ${Annonce.prix}">/</p>
+		<p th:text="'Prix : ' + ${Annonce.prix}">/</p>
 		<p th:text="'Enchere : ' + ${Annonce.enchere}">/</p>
 		<div th:if="${Annonce.enchere == true}">
-			<p>Fin enchere : </p>
+			<p>Fin enchere :</p>
 			<p th:text="${Annonce.toStringDate()}">/</p>
 		</div>
 		<div th:if="${supprimer} == true">
@@ -40,9 +40,20 @@
 			</form>
 		</div>
 		<div th:if="${supprimer} == false">
-			<form action="/acheter" method="post">
-				<button name="idAnnonce" id="idAnnonce" th:value="${Annonce.id}">Acheter</button>
-			</form>
+			<div th:if="${Annonce.enchere == false}">
+				<form action="/acheter" method="post">
+					<button name="idAnnonce" id="idAnnonce" th:value="${Annonce.id}">Acheter</button>
+				</form>
+			</div>
+			<div th:if="${Annonce.enchere == true}">
+				<form action="/encherir" method="post">
+					<p>
+						<label>Prix</label> <input type="number" name="enchere"
+							id="enchere" th:min="${enchereMin}"></input>
+						<button name="idAnnonce" id="idAnnonce" th:value="${Annonce.id}">Encherir</button>
+					</p>
+				</form>
+			</div>
 		</div>
 		<div th:if="${compte} == null">
 			<a href="/connection">Connection</a> <a href="/inscription">inscription</a>

@@ -38,5 +38,18 @@ public class VenteServiceImpl implements VenteService {
 		}
 		return null;
 	}
+	
+	@Transactional
+	public Vente createVente(String pseudoAcheteur, Annonce annonce) {
+		if (annonce != null && pseudoAcheteur != null && !pseudoAcheteur.equals(annonce.getVendeur().getSpeudo())) {
+			Compte compteVendeur = compteService.findCompteBySpeudo(annonce.getProduit().getPseudoVendeur());
+			Compte compteAcheteur = compteService.findCompteBySpeudo(pseudoAcheteur);
+			Produit produit = produitService.findById(annonce.getProduit().getId());
+			if (produit != null && compteVendeur != null && compteAcheteur != null) {
+				return venteRepository.save(new Vente(1, annonce.getPrix(), produit, compteAcheteur, compteVendeur));
+			}
+		}
+		return null;
+	}
 
 }
