@@ -36,7 +36,7 @@
 							<td><h5 th:text="${achat.id}"></h5></td>
 							<td><h5 th:text="${achat.produit.nomProduit}"></h5></td>
 							<td><h5 th:text="${achat.vendeurVente.speudo}"></h5></td>
-							<td><h5 th:text="${achat.prix}"></h5></td>
+							<td><h5 th:text="${achat.prix} + ' ' + ${devise}"></h5></td>
 						</tr>
 					</tbody>
 				</table>
@@ -51,16 +51,20 @@
 							<th>Id</th>
 							<th>Nom du produit</th>
 							<th>Description</th>
+							<th>Categorie</th>
+							<th>Sous-categorie</th>
 							<th>Prix</th>
 							<th>Enchere</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="annonce: ${listeAnnonce}">
-							<td><a th:href="@{/achater(id=${annonce.id})}">Consulter</a>
+							<td><a th:href="@{/acheter(id=${annonce.id})}">Consulter</a>
 							<td><h5 th:text="${annonce.produit.nomProduit}"></h5></td>
 							<td><h5 th:text="${annonce.description}"></h5></td>
-							<td><h5 th:text="${annonce.prix}"></h5></td>
+							<td><h5 th:text="${annonce.produit.categorie}"></h5></td>
+							<td><h5 th:text="${annonce.produit.miniCategorie}"></h5></td>
+							<td><h5 th:text="${annonce.prix} + ' ' + ${devise}"></h5></td>
 							<td><h5 th:text="${annonce.enchere}"></h5></td>
 
 						</tr>
@@ -83,14 +87,11 @@
 							<td><h5 th:text="${vente.id}"></h5></td>
 							<td><h5 th:text="${vente.produit.nomProduit}"></h5></td>
 							<td><h5 th:text="${vente.acheteurVente.speudo}"></h5></td>
-							<td><h5 th:text="${vente.prix}"></h5></td>
+							<td><h5 th:text="${vente.prix} + ' ' + ${devise}"></h5></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-		</div>
-		<div th:if="${compte.vendeur}">
-			<p th:text="'Liste vente : ' + TODO">/</p>
 		</div>
 	</div>
 	<br>
