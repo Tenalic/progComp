@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.tp.progComp.entities.Annonce;
 import org.tp.progComp.entities.Compte;
+import org.tp.progComp.entities.Produit;
 import org.tp.progComp.services.AnnonceService;
 import org.tp.progComp.services.ProduitService;
 
@@ -65,22 +66,41 @@ public class Home {
 	@PostMapping("/home")
 	public String recherche1Annonce(@RequestParam(value = "nomProduit", required = true) String nomProduit,
 			HttpSession session, Model model,RedirectAttributes attributes) {
-		Annonce a = new Annonce();
+		ArrayList<Annonce> a = new ArrayList<Annonce>(); 
 		model.addAttribute("compte",(Compte) session.getAttribute("compte"));
 		Iterable<Annonce> itr = annonceService.getAllAnnonce();
+		System.out.println("dd");
+		ArrayList<Produit> listProduit = produitService.findByNomProduit(nomProduit);
 		for(Annonce an : itr)
 		{
-			if(an.getProduit() == produitService.findByNomProduit(nomProduit))
+			if(listProduit.contains(an.getProduit()))
 			{
-				a = an;
-				model.addAttribute("Annonce",a);
-				return "Home";
-				
+				a.add(an);
 			}
 			
 	}
+		model.addAttribute("resAnnonce",a);
 		return "Home";
 	}
+	
+	@PostMapping("Home")
+	public String rechercheCategorie(@RequestParam(value = "categorie", required = true) String categorie,
+			HttpSession session, Model model, RedirectAttributes attributes){
+		model.addAttribute("compte",(Compte) session.getAttribute("compte"));
+		Iterable<Annonce> itr = annonceService.getAllAnnonce();
+		ArrayList<Annonce> listAnnonce = new ArrayList<Annonce>();
+		ArrayList<Produit> listProduit = produitService.findByCategorie(categorie);
+ 		for(Annonce an : itr)
+		{
+		if(listProduit.contains(an.getProduit()))
+		{
+			listAnnonce.add(an);
+		}
+			
+	}
+		model.addAttribute("ResultatAnnonce",listAnnonce);
+		return "Home";
+}
 	
 	
 }
