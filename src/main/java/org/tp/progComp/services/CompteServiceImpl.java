@@ -23,13 +23,11 @@ public class CompteServiceImpl implements CompteService {
 
 	@Override
 	public Compte findCompteByEmail(String email) {
-		System.out.println("Compte");
 		return compteRepository.findByEmail(email);
 	}
 
 	@Override
 	public Compte findCompteBySpeudo(String speudo) {
-		System.out.println("Speudo");
 		return compteRepository.findBySpeudo(speudo);
 	}
 
