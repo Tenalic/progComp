@@ -7,7 +7,8 @@
 <body>
 	<div align="left">
 		<p>changer devise</p>
-		<a href="/changer_devise?devise=€">€</a> <a href="/changer_devise?devise=$">$</a>
+		<a href="/changer_devise?devise=€">€</a> <a
+			href="/changer_devise?devise=$">$</a>
 	</div>
 	<div align="right" th:if="${compte}">
 		<a href="/deconnexion">Déconnexion</a> <a href="/monCompte">Mon
@@ -31,66 +32,23 @@
 	<div align="center">
 		<form action="home" method="post">
 			<p>
-				<label>Votre Recherche</label> <input type="text" name="nomProduit"
-					id="nomProduit" required>
+				<label>Recherche par nom de produit</label> <input type="text"
+					name="nomProduit" id="nomProduit" required>
 			</p>
-			<button>Rechercher Annonce </button>
+			<button>Rechercher Annonce</button>
 		</form>
 	</div>
-	
+
 	<div align="center">
 		<form action="Home" method="post">
 			<p>
-				<label>Votre Recherche</label> <input type="text" name="categorie"
-					id="categorie" required>
+				<label>Recherche par categorie</label> <input type="text"
+					name="categorie" id="categorie" required>
 			</p>
-			<button>Rechercher Annonce par categorie </button>
+			<button>Rechercher Annonce par categorie</button>
 		</form>
 	</div>
-	
-	<div align="center" th:if="${resAnnonce}">
-		<table border="1">
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Nom</th>
-					<th>Vendeur</th>
-					<th>Prix
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="Annonce: ${resAnnonce}">
-					<td><a th:href="@{/acheter(id=${Annonce.id})}">consulter</a></td>
-					<td><h5 th:text="${Annonce.produit.nomProduit}"></h5></td>
-					<td><h5 th:text="${Annonce.produit.pseudoVendeur}"></h5></td>
-					<td><h5 th:text="${Annonce.prix}"></h5></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	
-	<div align="center" th:if="${ResultatAnnonce}">
-		<table border="1">
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Nom</th>
-					<th>Vendeur</th>
-					<th>Prix
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="Annonce: ${ResultatAnnonce}">
-					<td><a th:href="@{/acheter(id=${Annonce.id})}">consulter</a></td>
-					<td><h5 th:text="${Annonce.produit.nomProduit}"></h5></td>
-					<td><h5 th:text="${Annonce.produit.pseudoVendeur}"></h5></td>
-					<td><h5 th:text="${Annonce.prix}"></h5></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	
-	
+
 	<div align="center" th:if="${listeAnnonce}">
 		<table border="1">
 			<thead>
@@ -98,6 +56,8 @@
 					<th>Id</th>
 					<th>Nom</th>
 					<th>Vendeur</th>
+					<th>Categorie</th>
+					<th>Sous-categorie</th>
 					<th>Prix</th>
 				</tr>
 			</thead>
@@ -106,10 +66,15 @@
 					<td><a th:href="@{/acheter(id=${Annonce.id})}">consulter</a></td>
 					<td><h5 th:text="${Annonce.produit.nomProduit}"></h5></td>
 					<td><h5 th:text="${Annonce.produit.pseudoVendeur}"></h5></td>
-					<td><h5 th:text="${Annonce.prix} + ${devise}"></h5></td>
+					<td><h5 th:text="${Annonce.produit.categorie}"></h5></td>
+					<td><h5 th:text="${Annonce.produit.miniCategorie}"></h5></td>
+					<td><h5 th:text="${Annonce.prix} + ' ' + ${devise}"></h5></td>
 				</tr>
 			</tbody>
 		</table>
+		<div th:if="${retour} == true">
+			<a href="/home">retour</a>
+		</div>
 	</div>
 
 

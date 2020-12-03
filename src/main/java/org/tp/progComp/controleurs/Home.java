@@ -21,11 +21,11 @@ import org.tp.progComp.services.ProduitService;
 
 @Controller
 public class Home {
-	
+
 	@Autowired
 	ProduitService produitService;
-	
-	@Autowired 
+
+	@Autowired
 	AnnonceService annonceService;
 
 	@RequestMapping("/")
@@ -47,60 +47,95 @@ public class Home {
 		session.removeAttribute("compte");
 		return "redirect:home";
 	}
-	
+
 	@GetMapping("/home")
-	public String afficherAnnonce(Model model,HttpSession session)
-	{
+	public String afficherAnnonce(Model model, HttpSession session) {
 		final List<Annonce> a = new ArrayList<Annonce>();
-		model.addAttribute("compte" ,(Compte) session.getAttribute("compte"));
+		String devise = (String) session.getAttribute("devise");
+		if (devise != null) {
+			model.addAttribute("devise", devise);
+		} else {
+			model.addAttribute("devise", "€");
+			devise = "€";
+		}
+		model.addAttribute("compte", (Compte) session.getAttribute("compte"));
 		Iterable<Annonce> itr = annonceService.getAllAnnonce();
-		for (Annonce an : itr)
-		{
+		for (Annonce an : itr) {
+			switch (devise) {
+			case "$":
+				an.setPrix(annonceService.euroToDollar(an.getPrix()));
+				break;
+			}
 			a.add(an);
 		}
 		model.addAttribute("listeAnnonce", a);
 		return "Home";
 	}
-	
 
 	@PostMapping("/home")
 	public String recherche1Annonce(@RequestParam(value = "nomProduit", required = true) String nomProduit,
-			HttpSession session, Model model,RedirectAttributes attributes) {
-		ArrayList<Annonce> a = new ArrayList<Annonce>(); 
-		model.addAttribute("compte",(Compte) session.getAttribute("compte"));
+			HttpSession session, Model model, RedirectAttributes attributes) {
+		ArrayList<Annonce> a = new ArrayList<Annonce>();
+		String devise = (String) session.getAttribute("devise");
+		if (devise != null) {
+			model.addAttribute("devise", devise);
+		} else {
+			model.addAttribute("devise", "€");
+			devise = "€";
+		}
+		model.addAttribute("compte", (Compte) session.getAttribute("compte"));
 		Iterable<Annonce> itr = annonceService.getAllAnnonce();
-		System.out.println("dd");
 		ArrayList<Produit> listProduit = produitService.findByNomProduit(nomProduit);
-		for(Annonce an : itr)
-		{
-			if(listProduit.contains(an.getProduit()))
-			{
+		for (Annonce an : itr) {
+			if (listProduit.contains(an.getProduit())) {
+				switch (devise) {
+				case "$":
+					an.setPrix(annonceService.euroToDollar(an.getPrix()));
+					break;
+				}
 				a.add(an);
 			}
-			
-	}
-		model.addAttribute("resAnnonce",a);
+
+		}
+		model.addAttribute("retour", true);
+		model.addAttribute("listeAnnonce", a);
 		return "Home";
 	}
-	
+
 	@PostMapping("Home")
 	public String rechercheCategorie(@RequestParam(value = "categorie", required = true) String categorie,
-			HttpSession session, Model model, RedirectAttributes attributes){
-		model.addAttribute("compte",(Compte) session.getAttribute("compte"));
+			HttpSession session, Model model, RedirectAttributes attributes) {
+		model.addAttribute("compte", (Compte) session.getAttribute("compte"));
+		String devise = (String) session.getAttribute("devise");
+		if (devise != null) {
+			model.addAttribute("devise", devise);
+		} else {
+			model.addAttribute("devise", "€");
+			devise = "€";
+		}
 		Iterable<Annonce> itr = annonceService.getAllAnnonce();
 		ArrayList<Annonce> listAnnonce = new ArrayList<Annonce>();
 		ArrayList<Produit> listProduit = produitService.findByCategorie(categorie);
- 		for(Annonce an : itr)
-		{
-		if(listProduit.contains(an.getProduit()))
-		{
-			listAnnonce.add(an);
+		for (Annonce an : itr) {
+			if (listProduit.contains(an.getProduit())) {
+				switch (devise) {
+				case "$":
+					an.setPrix(annonceService.euroToDollar(an.getPrix()));
+					break;
+				}
+				listAnnonce.add(an);
+			}
+
 		}
-			
-	}
-		model.addAttribute("ResultatAnnonce",listAnnonce);
+		model.addAttribute("retour", true);
+		model.addAttribute("listeAnnonce", listAnnonce);
 		return "Home";
-}
-	
-	
+	}
+
+	@GetMapping("/changer_devise")
+	public String changerDevise(@RequestParam(value = "devise") String devise, HttpSession session, Model model) {
+		session.setAttribute("devise", devise);
+		return "redirect:home";
+	}
+
 }
