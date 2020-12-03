@@ -1,3 +1,5 @@
+Travail de Stéphane COCQUEBERT et William LARCY
+
 L'écran principale est "Home" accessible a l'adresse /home (exemple : http://localhost:8080/home)
 
 Changer devise :
